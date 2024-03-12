@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, jsonify
-from todo_app.data.session_items import get_items, add_item
+from todo_app.data.trello_items import get_items, add_item
 
 from todo_app.flask_config import Config
 

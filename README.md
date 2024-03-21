@@ -62,3 +62,10 @@ Press CTRL+C to quit
  * Debugger PIN: 113-666-066
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+
+## Automated Tests
+
+### Unit tests
+
+Unit tests can be run by running `pytest` in the console. Make sure you have installed dependencies first.

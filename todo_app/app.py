@@ -3,6 +3,7 @@ from todo_app.data.trello_items import TrelloService
 from todo_app.enums import Status
 
 from todo_app.flask_config import Config
+from todo_app.models import ViewModel
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -11,7 +12,8 @@ trello_service = TrelloService()
 @app.route('/', methods = ['GET'])
 def index():
     items = trello_service.get_items()
-    return render_template('index.html', items = items, incomplete=Status.INCOMPLETE)
+    item_view_model = ViewModel(items)
+    return render_template('index.html', view_model=item_view_model, incomplete=Status.INCOMPLETE)
 
 @app.route('/', methods = ['POST'])
 def add_new_item():

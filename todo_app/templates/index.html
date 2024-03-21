@@ -18,7 +18,14 @@
       <ul class="list-group mb-4">
         {% for item in items %}
         <li>
-          {{item.title}}
+          <p>
+            {{item.name}}
+          </p>
+            {% if item.status == incomplete %}
+            <form action="{{url_for('complete_item', item_id=item.id)}}" method="post">
+              <input type="submit" value="Complete" title="Complete"></input>
+            </form>
+            {% endif %}
         </li>
         {% endfor %}
       </ul>

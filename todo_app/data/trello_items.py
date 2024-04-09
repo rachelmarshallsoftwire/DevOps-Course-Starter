@@ -15,7 +15,7 @@ class TrelloService():
     def get_items(self):
         get_items_url = f'https://api.trello.com/1/boards/{self.TRELLO_BOARD_ID}/lists?cards=open&key={self.TRELLO_API_KEY}&token={self.TRELLO_API_TOKEN}'
 
-        response = requests.request("GET", get_items_url)
+        response = requests.get(get_items_url)
         cards = []
         for list in response.json():
             cards = cards + [Item.from_trello_card(card) for card in list['cards']]

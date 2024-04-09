@@ -66,6 +66,4 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Automated Tests
 
-### Unit tests
-
-Unit tests can be run by running `pytest` in the console. Make sure you have installed dependencies first.
+Unit and integration tests can be run by running `pytest` in the console. Make sure you have installed dependencies first.

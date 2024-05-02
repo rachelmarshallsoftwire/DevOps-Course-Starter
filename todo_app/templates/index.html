@@ -14,9 +14,9 @@
   </form>
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
+      <h2>Incomplete Items</h2>
       <ul class="list-group mb-4">
-        {% for item in items %}
+        {% for item in view_model.incomplete_items %}
         <li>
           <p>
             {{item.name}}
@@ -26,6 +26,18 @@
               <input type="submit" value="Complete" title="Complete"></input>
             </form>
             {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-12">
+      <h2>Complete Items</h2>
+      <ul class="list-group mb-4">
+        {% for item in view_model.complete_items %}
+        <li>
+          <p>
+            {{item.name}}
+          </p>
         </li>
         {% endfor %}
       </ul>

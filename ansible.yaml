@@ -26,6 +26,7 @@
     - name: Clone repository
       git:
         repo: https://github.com/rachelmarshallsoftwire/DevOps-Course-Starter.git
+        version: exercise-4
         dest: /opt/todoapp
 
     - name: Install dependencies
@@ -38,7 +39,14 @@
         src: .env.j2
         dest: /opt/todoapp/.env
 
-    - name: Start app
+    - name: Copy todoapp.service
       shell:
-        chdir: /opt/todoapp
-        cmd: poetry run flask run --host 0.0.0.0
+        cmd: cp /opt/todoapp/todoapp.service /etc/systemd/system/todoapp.service
+      become: yes
+
+    - name: Start server
+      systemd:
+        name: todoapp.service
+        daemon_reload: true
+        state: restarted
+      become: yes

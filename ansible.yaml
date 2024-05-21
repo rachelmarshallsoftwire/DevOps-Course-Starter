@@ -1,3 +1,20 @@
+- name: Install app on new web server
+  hosts: managed
+  remote_user: ec2-user
+
+  vars_prompt:
+    - name: secret_key
+      prompt: What is the secret key?
+
+    - name: trello_api_key
+      prompt: What is the trello api key?
+    
+    - name: trello_api_secret
+      prompt: What is the trello api secret?
+    
+    - name: trello_api_token
+      prompt: What is the trello api token?
+
   tasks:
     - name: Install Git
       yum:

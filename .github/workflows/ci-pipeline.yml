@@ -6,8 +6,11 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
     steps:
-    - name: checkout repo code
+    - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: build docker
+    - name: Build test docker image
       run: docker build --target test -t todo_app:test .
+
+    - name: Run tests
+      run: docker run --rm todo_app:test

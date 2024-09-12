@@ -1,0 +1,12 @@
+.env
+.venv
+.github
+.idea
+.vscode
+.gitignore
+.gitpod.yml
+ansible.yml
+Dockerfile
+inventory.yaml
+tests/*
+.vscode

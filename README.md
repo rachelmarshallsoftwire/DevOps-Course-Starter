@@ -67,3 +67,23 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 ## Automated Tests
 
 Unit and integration tests can be run by running `pytest` in the console. Make sure you have installed dependencies first.
+
+
+## Running the app in a container
+
+For local development, first build the container by running:
+
+```
+docker build --target development --tag todo-app:dev .
+```
+in the terminal.
+
+Then run the container by running:
+```
+docker run --publish 8000:8000 --env-file .env -it todo-app:dev
+```
+
+To run the container with automatic reloading during development, run
+```
+docker run --publish 8000:8000 --env-file .env  --mount "type=bind,source=$(pwd)/todo_app,target=/todo_app/todo_app" -it todo-app:dev
+```

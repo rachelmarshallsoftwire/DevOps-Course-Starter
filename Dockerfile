@@ -12,3 +12,7 @@ ENTRYPOINT poetry run flask run --host 0.0.0.0 --port=8000
 FROM base as development
 ENV FLASK_DEBUG=true
 ENTRYPOINT poetry run flask run --host 0.0.0.0 --port=8000
+
+FROM base as test
+COPY . /test
+ENTRYPOINT poetry run pytest

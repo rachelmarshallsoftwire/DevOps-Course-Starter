@@ -1,0 +1,69 @@
+- name: Install app on new web server
+  hosts: managed
+  remote_user: ec2-user
+
+  vars_prompt:
+    - name: secret_key
+      prompt: What is the secret key?
+
+    - name: trello_api_key
+      prompt: What is the trello api key?
+    
+    - name: trello_api_secret
+      prompt: What is the trello api secret?
+    
+    - name: trello_api_token
+      prompt: What is the trello api token?
+
+  tasks:
+    - name: Install Git
+      yum:
+        name: git
+        state: present
+      become: yes
+
+    - name: Install Python3
+      yum:
+        name: python3
+        state: present
+      become: yes
+
+    - name: Install Poetry
+      shell:
+        cmd: curl -sSL https://install.python-poetry.org | python3 -
+        creates: /home/ec2-user/.local/bin
+
+    - name: Create To-Do App directory
+      file:
+        path: /opt/todoapp
+        state: directory
+        owner: ec2-user
+      become: yes
+
+    - name: Clone repository
+      git:
+        repo: https://github.com/rachelmarshallsoftwire/DevOps-Course-Starter.git
+        version: exercise-4
+        dest: /opt/todoapp
+
+    - name: Install dependencies
+      shell:
+        chdir: /opt/todoapp
+        cmd: poetry install
+
+    - name: Template .env file
+      template:
+        src: .env.j2
+        dest: /opt/todoapp/.env
+
+    - name: Copy todoapp.service
+      shell:
+        cmd: cp /opt/todoapp/todoapp.service /etc/systemd/system/todoapp.service
+      become: yes
+
+    - name: Start server
+      systemd:
+        name: todoapp.service
+        daemon_reload: true
+        state: restarted
+      become: yes

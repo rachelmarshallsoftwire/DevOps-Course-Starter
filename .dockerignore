@@ -8,5 +8,4 @@
 ansible.yml
 Dockerfile
 inventory.yaml
-tests/*
 .vscode
